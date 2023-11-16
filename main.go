@@ -57,24 +57,6 @@ func deleteSpart(c * gin.Context) {
 	c.IndentedJSON(http.StatusOK, spart)
 }
 
-// func returnSpart(c * gin.Context) {
-// 	id, ok := c.GetQuery("id")
-	
-// 	if !ok {
-// 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "ID Tidak Ditemukan"})
-// 	}
-
-// 	book, err := getSpartById(id)
-
-// 	if err != nil {
-// 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Spare Part Tidak Ditemukan."})
-// 		return
-// 	}
-
-// 	book.Quantity += 1 
-// 	c.IndentedJSON(http.StatusOK, book)
-// }
-
 func getSpartById(id string) (*spart, error) {
 	for i, b := range sparts {
 		if b.ID == id {
@@ -102,7 +84,7 @@ func main() {
 	router.GET("/sparts/:id", spartById)
 	router.POST("/sparts", postSparts)
 	router.PATCH("/delete", deleteSpart)
-	// router.PATCH("/return", returnSpart)
+
 
 	router.Static("/css", "./css")
 	router.Static("/assets", "./assets")
@@ -115,3 +97,24 @@ func main() {
 
 	router.Run("localhost:8080")
 }
+
+
+// func returnSpart(c * gin.Context) {
+// 	id, ok := c.GetQuery("id")
+	
+// 	if !ok {
+// 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "ID Tidak Ditemukan"})
+// 	}
+
+// 	book, err := getSpartById(id)
+
+// 	if err != nil {
+// 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Spare Part Tidak Ditemukan."})
+// 		return
+// 	}
+
+// 	book.Quantity += 1 
+// 	c.IndentedJSON(http.StatusOK, book)
+// }
+
+	// router.PATCH("/return", returnSpart)
