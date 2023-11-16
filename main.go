@@ -107,7 +107,7 @@ func main() {
 	router.Static("/css", "./css")
 	router.Static("/assets", "./assets")
 	router.StaticFile("/home", "homepage.html")
-	router.StaticFile("/item", "itempage.html")
+	router.StaticFile("/itemm", "itempage.html")
 
 	router.Run("localhost:8080")
 }
