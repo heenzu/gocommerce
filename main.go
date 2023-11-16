@@ -15,7 +15,7 @@ type spart struct {
 
 var sparts = []spart {
 	{ID: "1", ProductName: "Knalpot", Price: 500000, Quantity: 5},
-	{ID: "2", ProductName: "Mesin Motor", Price: 3500000, Quantity: 5},
+	{ID: "2", ProductName: "Oli", Price: 50000, Quantity: 5},
 	{ID: "3", ProductName: "Kaca Spion", Price: 125000, Quantity: 6},
 }
 
@@ -34,7 +34,7 @@ func spartById(c * gin.Context) {
 	c.IndentedJSON(http.StatusOK, spart)
 }
 
-func checkoutSpart(c * gin.Context) {
+func deleteSpart(c * gin.Context) {
 	id, ok := c.GetQuery("id")
 	
 	if !ok {
@@ -57,23 +57,23 @@ func checkoutSpart(c * gin.Context) {
 	c.IndentedJSON(http.StatusOK, spart)
 }
 
-func returnSpart(c * gin.Context) {
-	id, ok := c.GetQuery("id")
+// func returnSpart(c * gin.Context) {
+// 	id, ok := c.GetQuery("id")
 	
-	if !ok {
-		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "ID Tidak Ditemukan"})
-	}
+// 	if !ok {
+// 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "ID Tidak Ditemukan"})
+// 	}
 
-	book, err := getSpartById(id)
+// 	book, err := getSpartById(id)
 
-	if err != nil {
-		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Spare Part Tidak Ditemukan."})
-		return
-	}
+// 	if err != nil {
+// 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Spare Part Tidak Ditemukan."})
+// 		return
+// 	}
 
-	book.Quantity += 1 
-	c.IndentedJSON(http.StatusOK, book)
-}
+// 	book.Quantity += 1 
+// 	c.IndentedJSON(http.StatusOK, book)
+// }
 
 func getSpartById(id string) (*spart, error) {
 	for i, b := range sparts {
@@ -101,7 +101,7 @@ func main() {
 	router.GET("/sparts", getSparts)
 	router.GET("/sparts/:id", spartById)
 	router.POST("/sparts", postSparts)
-	// router.PATCH("/checkout", checkoutSpart)
+	router.PATCH("/delete", deleteSpart)
 	// router.PATCH("/return", returnSpart)
 
 	router.Static("/css", "./css")
@@ -111,6 +111,7 @@ func main() {
 	router.StaticFile("/item2", "itempage2.html")
 	router.StaticFile("/item3", "itempage3.html")
 	router.StaticFile("/item4", "itempage4.html")
+	router.StaticFile("/cart", "cart.html")
 
 	router.Run("localhost:8080")
 }
