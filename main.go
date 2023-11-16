@@ -101,19 +101,16 @@ func main() {
 	router.GET("/sparts", getSparts)
 	router.GET("/sparts/:id", spartById)
 	router.POST("/sparts", postSparts)
-	router.PATCH("/checkout", checkoutSpart)
-	router.PATCH("/return", returnSpart)
+	// router.PATCH("/checkout", checkoutSpart)
+	// router.PATCH("/return", returnSpart)
 
 	router.Static("/css", "./css")
 	router.Static("/assets", "./assets")
 	router.StaticFile("/home", "homepage.html")
-	router.StaticFile("/itemm", "itempage.html")
+	router.StaticFile("/item1", "itempage1.html")
+	router.StaticFile("/item2", "itempage2.html")
+	router.StaticFile("/item3", "itempage3.html")
+	router.StaticFile("/item4", "itempage4.html")
 
 	router.Run("localhost:8080")
 }
-
-// curl command
-// curl localhost:8080/sparts #Untuk Menampilkan Barang (GET)
-// curl localhost:8080/sparts/[id] #Untuk Menampilkan BarangById (GET)
-// curl localhost:8080/sparts -H "Content-Type: application/json" -d @body.json --request "POST" #Untuk tambah data (POST)
-// curl localhost:8080/checkout?id=1 --request "PATCH" #Untuk CheckOut Barang (PATCH)
